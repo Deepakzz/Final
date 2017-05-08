@@ -11,32 +11,38 @@ if($action == "show_login_page")
   include('login.php');
 }else if($action == 'test_user')
 {
-  $username = $_POST['reg_uname'];
-  $password = $_POST['reg_password'];
+  $username = $_POST['email'];
+  $password = $_POST['password'];
   $suc = isUserValid($username,$password);
   if($suc == true)
   {
     $result = getTodoItems($_COOKIE['my_id']);
+    $result2 = completedItems($_COOKIE['my_id']);
     include('list.php');
   }else{
     header("Location: badInfo.php");
   }
-}else if ($action == 'registrar')
+}else if ($action == 'register')
 {
  // echo " we want to create a new account";
-  $name = filter_input(INPUT_POST, 'reg_uname');
-  if(isset($name))
+   $fname = filter_input(INPUT_POST, 'firstname');
+   $lname = filter_input(INPUT_POST, 'lastname');
+   $email = filter_input(INPUT_POST, 'mailid');
+   $contact = filter_input(INPUT_POST, 'contact');
+   $username = filter_input(INPUT_POST, 'user');
+   $password = filter_input(INPUT_POST, 'password');
+   $birth = filter_input(INPUT_POST, 'dob');
+   $gender = filter_input(INPUT_POST, 'gender');
+   $exit = registerUser($fname,$lname,$contact,$email,$username,$password,$birth,$gender);
+   if($exit == true)
   {
-     $pass = filter_input(INPUT_POST, 'reg_password');
-     $exit = createUser($name,$pass);
-     if($exit == true)
-     {
-       include('user_exit.php');
-     }else {
+     
        header("Location: login.php");
-     }
-  }
-}else if ($action == 'add')
+     }else {
+     header("Location: index.php");
+  
+}
+else if ($action == 'add')
 {
 
 
