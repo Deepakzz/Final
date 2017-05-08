@@ -14,6 +14,6 @@ text-align: center;
 <body>
 <div class="Welcome to the Page">
 <strong> <p>  To Do List 2017</p></strong>
-<strong> <p> Developed By - Balakumar Shanmugam</p></strong>
+<strong> <p> Developed By - Deepak Rameshkumar</p></strong>
 </div>
 </body>
