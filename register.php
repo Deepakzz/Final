@@ -5,7 +5,7 @@
 <div class="grad"></div>
 <br>
 <div class="login">
-<form class="form-login" method="post" action="index.php">
+<form class="form-login" method="post" action="./controller/index.php">
 <input type="text" placeholder="First Name" name="firstname"><br>
 <input type="text" placeholder="Last Name" name="lastname"><br>
 <input type="text" placeholder="E-mail" name="mailid"><br>
