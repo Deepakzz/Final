@@ -33,7 +33,7 @@ if($action == "show_login_page")
    $password = filter_input(INPUT_POST, 'password');
    $birth = filter_input(INPUT_POST, 'dob');
    $gender = filter_input(INPUT_POST, 'gender');
-   $exit = registerUser($fname,$lname,$contact,$email,$username,$password,$birth,$gender);
+   $exit = registerUser($fname,$lname,$email,$contact,$username,$password,$birth,$gender);
    if($exit == true)
   {
      
@@ -70,6 +70,41 @@ $addtask = addTodoItems($user_id,$description,$task,$date,$time,$status);
 	  include('list.php');
 	  }
 	  }
-
-
+else if($action == 'edittask'){
+ $editid = filter_input(INPUT_POST, 'user_id');
+ $result3 = getTask($editid);
+  include('edittask.php');
+  }
+  else if ($action == 'deletetask'){
+  $taskid = filter_input(INPUT_POST, 'user_id');
+   $task = deleteTask($taskid);
+   if($task == true){
+   $result = getToDoItems($_COOKIE['my_id']);
+   $result2 = completedItems($_COOKIE['my_id']);
+   include('list.php');
+   }
+   }
+   else if ($action == 'etask'){
+   $etask = filter_input(INPUT_POST, 'edtask');
+   $edescription = filter_input(INPUT_POST, 'edescription');
+   $edate = filter_input(INPUT_POST, 'date');
+   $etime = filter_input(INPUT_POST, 'time');
+   $eid = filter_input(INPUT_POST, 'user_id');
+   $editvalue = editValue($etask,$edescription,$etime,$edate,$eid);
+   if($editvalue == true){
+   $result = getToDoItems($_COOKIE['my_id']);
+   $result2 = completedItems($_COOKIE['my_id']);
+   include('list.php');
+   }
+   }
+else if ($action == 'statusupdate'){
+$id = filter_input(INPUT_POST, 'user_id');
+$status = "complete";
+$statusupdate = updateStatus($status,$id);
+if($statusupdate == true){
+$result = getToDoItems($_COOKIE['my_id']);
+$result2 = completedItems($_COOKIE['my_id']);
+include('list.php');
+}
+}
 ?>
