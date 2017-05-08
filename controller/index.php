@@ -1,6 +1,6 @@
 <?php
-require('db_connection.php');
-require('db.php');
+require('../model/db_connection.php');
+require('../model/db.php');
 $action = filter_input(INPUT_POST, "action");
 if($action == NULL)
 {
@@ -8,7 +8,7 @@ if($action == NULL)
 }
 if($action == "show_login_page")
 {
-  include('login.php');
+  include('./login.php');
 }else if($action == 'test_user')
 {
   $username = $_POST['email'];
@@ -20,7 +20,7 @@ if($action == "show_login_page")
     $result2 = completedItems($_COOKIE['my_id']);
     include('list.php');
   }else{
-    header("Location: badInfo.php");
+    header("Location: ../fault/badInfo.php");
   }
 }else if ($action == 'register')
 {
@@ -37,9 +37,9 @@ if($action == "show_login_page")
    if($exit == true)
   {
      
-       header("Location: login.php");
+       header("Location: ../fault/userexists.php");
      }else {
-     header("Location: index.php");
+     header("Location: ../login.php");
  } 
 }
 else if ($action == 'add')
