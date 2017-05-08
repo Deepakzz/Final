@@ -1,7 +1,7 @@
 <?php
    function addTodoItem($user_id,$description,$task,$date,$time,$status){
      global $db;
-     $query = 'insert into todo_list(todo, user_id, status, description, date, time) values (:task,
+     $query = 'insert into todo_things(todo, user_id, status, description, date, time) values (:task,
      :userid, :status, :todo_text, :date, :time)';
      $statement = $db->prepare($query);
      $statement->bindValue(':userid',$user_id);
@@ -15,9 +15,20 @@
     
     }
 
+function updateStatus($status,$id){
+        global $db;
+	$query = 'update todo_things set status = :status where id = :id';
+			$statement = $db->prepare($query);
+				$statement->bindValue(':status',$status);
+					$statement->bindValue(':id',$id);
+						$statement->execute();
+							$statement->closeCursor();
+								return true;
+
+}								
      function deleteTask($taskid){
      global $db;
-     $query = 'delete from todo_list where id = :task';
+     $query = 'delete from todo_things where id = :task';
      $statement = $db->prepare($query);
      $statement->bindValue(':task',$taskid);
      $statement->execute();
@@ -28,7 +39,7 @@
     }
    function getTodoItems($user_id){
      global $db;
-     $query = 'select * from todo_list where user_id= :userid and status = :status';
+     $query = 'select * from todo_things where user_id= :userid and status = :status';
      $statement = $db->prepare($query);
      $statement->bindValue(':userid',$user_id);
      $statement->bindValue(':status','incomplete');
@@ -39,7 +50,7 @@
     }
     function completedItems($user_id){
     global $db;
-    $query = 'select * from todo_list where user_id= :userid and status = :status';
+    $query = 'select * from todo_things where user_id= :userid and status = :status';
     $statement = $db->prepare($query);
     $statement->bindValue(':userid',$user_id);
     $statement->bindValue(':status','complete');
@@ -50,7 +61,7 @@
     }
     function editValue($etask,$edescription,$edate,$etime,$eid){
     global $db;
-    $query = 'update todo_list set todo = :etask, description = :edescription, date = :etime, time = :edate where id = :eid';
+    $query = 'update todo_things set todo = :etask, description = :edescription, date = :etime, time = :edate where id = :eid';
     $statement = $db->prepare($query);
     $statement->bindValue(':etask',$etask);
     $statement->bindValue(':eid',$eid);
@@ -63,7 +74,7 @@
     }
     function getTask($editid){
     global $db;
-    	$query = 'select * from todo_list where id = :eid';
+    	$query = 'select * from todo_things where id = :eid';
 	$statement = $db->prepare($query);
 	$statement->bindValue(':eid',$editid);
 	$statement->execute();
@@ -73,7 +84,7 @@
    }
       function registerUser($fname,$lname,$contact,$email,$username,$password,$birth,$gender){
       global $db;
-      $query = 'select * from user_info where username = :uname';
+      $query = 'select * from Client where username = :uname';
       $statement = $db->prepare($query);
       $statement->bindValue(':uname',$username);
       $statement->execute();
@@ -84,7 +95,7 @@
       return true;
      }
    else{
-     $query = 'insert into user_info(first_name,last_name,contact_no,email,username,password,birth,gender)
+     $query = 'insert into Client(first_name,last_name,contact_no,email,username,password,birth,gender)
                 values
 	       (:fname,:lname,:cont,:emailid,:uname,:pass,:birth,:gender)';
       $statement = $db->prepare($query);
@@ -105,8 +116,8 @@
    
    function isUserValid($username,$password){
      global $db;
-     $query = 'select * from users where username = :name and 
-     passwordHash = :pass';
+     $query = 'select * from Client where email_id = :name and 
+     password = :pass';
      $statement = $db->prepare($query);
      $statement->bindValue(':name',$username);
      $statement->bindValue(':pass',$password);
