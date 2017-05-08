@@ -40,11 +40,36 @@ if($action == "show_login_page")
        header("Location: login.php");
      }else {
      header("Location: index.php");
-  
+ } 
 }
 else if ($action == 'add')
 {
-
-
+ $user_id = filter_input(INPUT_POST, 'userid',FILTER_VALIDATE_INT);
+  $description = filter_input(INPUT_POST, 'description');
+ $add = addTodoItem($user_id,$description);
+ if($add == true)
+ {
+$result = getToDoItems($_COOKIE['my_id']);
+$result2 = completedItems($_COOKIE['my_id']);
+include('list.php');
 }
+}
+
+else if ($action == 'addtask')
+{
+$user_id = filter_input(INPUT_POST, 'userid',FILTER_VALIDATE_INT);
+$task = filter_input(INPUT_POST, 'task');
+$description = filter_input(INPUT_POST, 'description');
+$date = filter_input(INPUT_POST, 'datetodo');
+$time = filter_input(INPUT_POST, 'timetodo');
+$status = "incomplete";
+$addtask = addTodoItems($user_id,$description,$task,$date,$time,$status);
+          if($addtask == true){
+	  $result = getToDoItems($_COOKIE['my_id']);
+          $result2 = completedItems($_COOKIE['my_id']);
+	  include('list.php');
+	  }
+	  }
+
+
 ?>
