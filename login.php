@@ -31,7 +31,7 @@
     button {
       background-color: #4CAF50;
       color: white;
-      padding: 6px 15px;
+    i  padding: 6px 15px;
       margin: 8px 0;
       width: 50%;
     }
@@ -40,30 +40,18 @@
 </head>
 
 <body>
-  <div class='container' align="center">
-
-    <form method = "post" action="index.php" class="login">
-      <div>
-        <label><b>Username</b></label>
-        <input type="text" name="reg_uname" placeholder="Enter Username" required>
-      </div>
-      <div>
-        <label><b>Password</b></label>
-        <input type="password" name="reg_password" placeholder="Enter Password" required>
-        <input type ="hidden" name="action" value="test_user">
-      </div>
-      <div>
-        <button type="submit">Login</button>     
-      </div>
+  <div class="body"></div>
+  <div class="grad"></div>
+    <br>
+    <div class="login">
+    <form class="form-login" method="post" action="index.php">
+    <input type="text" placeholder="E-mail" name="email"><br>	
+    <input type="password" placeholder="password" name="password"><br>
+    <input type ="hidden" name="action" value="test_user">
+    <input type="submit" value="Login" name="submit">
     </form>
-
-    <form action="register.php" class="register">
-      <div>
-        <button type="submit">Sign up</button>
-      </div>
-    </form>
-
-  </div>
-</body>
-
-</html>
+    <form class="form-login" method="post" action="register.php">
+    <input type="submit" value="Sign-Up" name="submit">
+    
+    </body>
+    </html>
