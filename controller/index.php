@@ -20,7 +20,7 @@ if($action == "show_login_page")
     $result2 = completedItems($_COOKIE['my_id']);
     include('list.php');
   }else{
-    header("Location: ../fault/badInfo.php");
+    header("Location: ../fault/badinfo.php");
   }
 }else if ($action == 'register')
 {
